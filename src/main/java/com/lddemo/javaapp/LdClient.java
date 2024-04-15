@@ -1,9 +1,5 @@
 package com.lddemo.javaapp;
 
-import java.io.*;
-import java.util.Properties;
-
-import com.launchdarkly.sdk.*;
 import com.launchdarkly.sdk.server.*;
 
 public class LdClient {
@@ -13,18 +9,7 @@ public class LdClient {
     private LDClient client;
 
     public LdClient() {
-        String rootPath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
-        String propsFile = rootPath + "ldclient.properties";
-        Properties appProps = new Properties();
-        try {
-            InputStream in = new FileInputStream(propsFile);
-            appProps.load(in);
-            in.close();
-        } catch (Exception e) {
-            System.out.println(propsFile + " is missing from the resources directory.");
-        }
-
-        client = new LDClient(appProps.getProperty("sdkkey"));
+        client = new LDClient(System.getenv("LD_SDK_KEY"));
     }
 
     private static LdClient getInstance() {
@@ -37,14 +22,5 @@ public class LdClient {
 
     public static LDClient getClient() {
         return getInstance().client;
-    }
-
-    public static void setContext(LDContext context) {
-        String flag = "test-flag";
-        LDClient client = getInstance().client;
-        client.getFlagTracker().addFlagValueChangeListener(flag, context, event -> {
-            System.out.printf("Flag \"%s\" for context \"%s\" has changed from %s to %s\n", event.getKey(),
-                    context.getKey(), event.getOldValue(), event.getNewValue());
-        });
     }
 }

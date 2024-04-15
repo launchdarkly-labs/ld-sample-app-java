@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.launchdarkly.sdk.LDContext;
-import com.launchdarkly.sdk.server.LDClient;;;
+import com.launchdarkly.sdk.server.LDClient;
 
 @Controller
 public class SimpleController {
@@ -20,7 +20,6 @@ public class SimpleController {
                 .kind("device")
                 .name("Linux")
                 .build();
-        LdClient.setContext(context);
         boolean flagValue = client.boolVariation("test-flag", context, false);
 
         model.addAttribute("appName", appName);
