@@ -9,7 +9,8 @@ public class LdClient {
     private LDClient client;
 
     public LdClient() {
-        client = new LDClient(System.getenv("LD_SDK_KEY"));
+        String sdkKey = System.getenv("LD_SDK_KEY");
+        client = new LDClient(sdkKey);
     }
 
     private static LdClient getInstance() {
