@@ -1,0 +1,524 @@
+/* ============ Coffee Wholesale Site — Shared Stylesheet ============ */
+/* Color palette inspired by a cozy coffee shop */
+:root {
+  --coffee-900: #2b1f1a;
+  /* espresso */
+  --coffee-700: #4b342b;
+  /* dark roast */
+  --coffee-600: #6a4a3c;
+  /* mocha */
+  --coffee-400: #a3765a;
+  /* latte */
+  --coffee-300: #c89f85;
+  /* cappuccino */
+  --cream-100: #f7f2ec;
+  /* steamed milk */
+  --foam-50: #fcfaf7;
+  /* microfoam */
+  --accent: #a35a2b;
+  /* cinnamon syrup */
+  --success: #2f855a;
+  --warning: #b7791f;
+  --error: #c53030;
+  --shadow: 0 10px 25px rgba(0, 0, 0, .08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  line-height: 1.6;
+  color: var(--coffee-900);
+  background:
+    radial-gradient(1200px 800px at 10% -10%, #ffffff 0%, rgba(255, 255, 255, 0) 60%),
+    radial-gradient(900px 600px at 110% 10%, #fff9f3 0%, rgba(255, 255, 255, 0) 60%),
+    linear-gradient(180deg, var(--foam-50), var(--cream-100));
+}
+
+.container {
+  width: min(1100px, 92vw);
+  margin: 0 auto;
+}
+
+/* Header / Nav */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, .7);
+  border-bottom: 1px solid rgba(0, 0, 0, .06);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .8rem 0;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.brand .logo {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 55% 45%, #0000 26px, rgba(0, 0, 0, 0.08) 26px 36px, #0000 36px),
+    radial-gradient(12px 10px at 48% 46%, #3e2a22 35%, #0000 35%),
+    conic-gradient(from 180deg at 50% 50%, var(--coffee-700), var(--coffee-900));
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .75), var(--shadow);
+}
+
+.brand .title {
+  font-weight: 800;
+  letter-spacing: .3px;
+}
+
+.brand .subtitle {
+  font-size: .8rem;
+  color: var(--coffee-600);
+  display: block;
+  margin-top: -4px;
+}
+
+.nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav a {
+  text-decoration: none;
+  color: var(--coffee-900);
+  font-weight: 600;
+  padding: .5rem .75rem;
+  border-radius: 10px;
+}
+
+.nav a:hover {
+  background: rgba(163, 90, 43, .08);
+}
+
+/* Mobile nav */
+.nav-toggle {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .nav ul {
+    display: none;
+    position: absolute;
+    right: 4vw;
+    top: 60px;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, .08);
+    box-shadow: var(--shadow);
+    border-radius: 14px;
+    padding: .5rem;
+    width: min(80vw, 320px);
+    flex-direction: column;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+    border: 1px solid rgba(0, 0, 0, .1);
+    background: white;
+    border-radius: 10px;
+    padding: .5rem .7rem;
+    box-shadow: var(--shadow);
+  }
+
+  .nav.show ul {
+    display: flex;
+  }
+}
+
+/* Hero */
+.hero {
+  background:
+    radial-gradient(1200px 800px at 0% 0%, rgba(163, 90, 43, .08), rgba(0, 0, 0, 0) 60%);
+  padding: clamp(2rem, 5vw, 4rem) 0 2rem;
+}
+
+.hero .eyebrow {
+  text-transform: uppercase;
+  letter-spacing: .15em;
+  font-weight: 800;
+  color: var(--accent);
+  font-size: .8rem;
+}
+
+.hero h1 {
+  font-size: clamp(1.9rem, 3.2vw, 3.2rem);
+  margin: .4rem 0 0;
+  line-height: 1.15;
+}
+
+.hero p {
+  color: var(--coffee-700);
+  max-width: 58ch;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  text-decoration: none;
+  border: none;
+  border-radius: 12px;
+  padding: .7rem 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  background: var(--accent);
+  color: white;
+  box-shadow: var(--shadow);
+}
+
+.btn.secondary {
+  background: var(--coffee-700);
+}
+
+.btn.ghost {
+  background: transparent;
+  color: var(--coffee-900);
+  border: 1px solid rgba(0, 0, 0, .12);
+}
+
+.btn:hover {
+  filter: brightness(.98);
+  transform: translateY(-1px);
+}
+
+/* Sections */
+.section {
+  padding: 2.2rem 0;
+}
+
+.section h2 {
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  margin: 0 0 .8rem;
+}
+
+/* Promotions */
+.promo-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1rem;
+}
+
+.promo {
+  grid-column: span 6;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, .06);
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow: var(--shadow);
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.promo .badge {
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: .75rem;
+  letter-spacing: .1em;
+  color: var(--accent);
+  background: rgba(163, 90, 43, .1);
+  padding: .25rem .5rem;
+  border-radius: 999px;
+}
+
+.promo h3 {
+  margin: .2rem 0 .4rem;
+}
+
+@media (max-width: 900px) {
+  .promo {
+    grid-column: span 12;
+  }
+}
+
+/* Category & product cards */
+.grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(12, 1fr);
+}
+
+.card {
+  grid-column: span 3;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, .06);
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow: var(--shadow);
+}
+
+.card .thumb {
+  height: 130px;
+  border-radius: 12px;
+  background:
+    repeating-linear-gradient(45deg, rgba(163, 90, 43, .12), rgba(163, 90, 43, .12) 8px, rgba(0, 0, 0, 0) 8px, rgba(0, 0, 0, 0) 16px),
+    linear-gradient(135deg, var(--coffee-300), var(--coffee-400));
+  margin-bottom: .7rem;
+}
+
+.card h3 {
+  margin: .4rem 0 .4rem;
+  font-size: 1.05rem;
+}
+
+.card p {
+  color: var(--coffee-700);
+  font-size: .95rem;
+  margin: 0;
+}
+
+.card .price {
+  font-weight: 800;
+  color: var(--coffee-900);
+  margin-top: .5rem;
+}
+
+@media (max-width: 1100px) {
+  .card {
+    grid-column: span 4;
+  }
+}
+
+@media (max-width: 760px) {
+  .card {
+    grid-column: span 6;
+  }
+}
+
+@media (max-width: 520px) {
+  .card {
+    grid-column: span 12;
+  }
+}
+
+/* About */
+.lead {
+  font-size: 1.1rem;
+  color: var(--coffee-700);
+}
+
+/* Products page */
+.filters {
+  display: flex;
+  gap: .6rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.filters input,
+.filters select {
+  padding: .6rem .7rem;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, .15);
+  background: white;
+}
+
+/* Contact form */
+form {
+  display: grid;
+  gap: .8rem;
+  max-width: 640px;
+}
+
+label {
+  font-weight: 700;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: .7rem .8rem;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, .15);
+  background: white;
+}
+
+textarea {
+  min-height: 140px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .8rem;
+}
+
+@media (max-width: 640px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Footer */
+.footer {
+  padding: 2rem 0;
+  color: var(--coffee-700);
+}
+
+.footer .grid {
+  align-items: start;
+}
+
+.footer small {
+  color: var(--coffee-600);
+}
+
+/* Utility */
+.muted {
+  color: var(--coffee-600);
+}
+
+.spacer {
+  height: 1.2rem;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, .08);
+  margin: 1.2rem 0;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  line-height: 1.6;
+  color: var(--coffee-900);
+
+  /* Background */
+  background: url("../img/background.png") no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* ============ Carousel (Rotating Banner) ============ */
+.carousel {
+  position: relative;
+  overflow: hidden;
+  background: #f7f2ec;
+  border-bottom: 1px solid rgba(0, 0, 0, .06);
+}
+
+.container {
+  width: min(1100px, 92vw);
+  margin: 0 auto;
+}
+
+.carousel .slides {
+  display: flex;
+  transition: transform .6s ease-in-out;
+  will-change: transform;
+}
+
+.carousel .slide {
+  position: relative;
+  min-width: 100%;
+  height: clamp(260px, 45vw, 520px);
+  background-position: center;
+  background-size: cover;
+}
+
+.carousel .overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(800px 400px at 8% 50%, rgba(255, 255, 255, .9), rgba(255, 255, 255, .25) 60%, rgba(0, 0, 0, 0) 100%);
+}
+
+.carousel .caption {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  padding: clamp(1rem, 4vw, 3rem);
+}
+
+.carousel .caption h2 {
+  font-size: clamp(1.6rem, 3vw, 2.6rem);
+  margin: 0 0 .4rem;
+  color: white;
+}
+
+.carousel .caption p {
+  /* color: #3f342d; */
+  margin: 0;
+  color: white;
+}
+
+.carousel .controls {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: .4rem;
+}
+
+.carousel button {
+  border: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, .25);
+  cursor: pointer;
+}
+
+.carousel button[aria-current="true"] {
+  background: #a35a2b;
+}
+
+.carousel .prev,
+.carousel .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: white;
+  border: 1px solid rgba(0, 0, 0, .12);
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, .08);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.carousel .prev {
+  left: 10px;
+}
+
+.carousel .next {
+  right: 10px;
+}
+
+@media (max-width:700px) {
+
+  .carousel .prev,
+  .carousel .next {
+    display: none;
+  }
+}

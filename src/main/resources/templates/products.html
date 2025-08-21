@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/default.html}">
+
+<body>
+    <div id="page" layout:fragment="content">
+        <section class="hero">
+            <div class="container">
+                <div class="eyebrow">Catalog</div>
+                <h1>Products</h1>
+                <p class="muted">Browse core categories. Replace with your real SKUs and pricing when ready.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="filters" role="region" aria-label="Product filters">
+                    <input type="search" placeholder="Search products…" aria-label="Search products">
+                    <select aria-label="Category">
+                        <option>All Categories</option>
+                        <option>Beans & Roasts</option>
+                        <option>Cups & Lids</option>
+                        <option>Espresso Machines</option>
+                        <option>Grinders</option>
+                        <option>Syrups & Sauces</option>
+                    </select>
+                    <select aria-label="Sort by">
+                        <option>Sort: Popular</option>
+                        <option>Sort: Price (Low→High)</option>
+                        <option>Sort: Price (High→Low)</option>
+                    </select>
+                    <a class="btn ghost" href="#">Reset</a>
+                </div>
+
+                <div class="grid">
+                    <div class="card">
+                        <div class="thumb"></div>
+                        <h3>House Espresso (22 lb)</h3>
+                        <p>Chocolate, almond, citrus. Medium roast.</p>
+                        <div class="price">$189.00</div>
+                        <div class="spacer"></div>
+                        <a class="btn" href="#">Add to Cart</a>
+                    </div>
+
+                    <div class="card">
+                        <div class="thumb"></div>
+                        <h3>12 oz Compostable Cups (1000)</h3>
+                        <p>PLA-lined, fits standard 90mm lids.</p>
+                        <div class="price">$94.00</div>
+                        <div class="spacer"></div>
+                        <a class="btn" href="#">Add to Cart</a>
+                    </div>
+
+                    <div class="card">
+                        <div class="thumb"></div>
+                        <h3>3-Group Espresso Machine</h3>
+                        <p>PID temp control, volumetric dosing.</p>
+                        <div class="price">$10,499.00</div>
+                        <div class="spacer"></div>
+                        <a class="btn" href="#">Request Quote</a>
+                    </div>
+
+                    <div class="card">
+                        <div class="thumb"></div>
+                        <h3>On-Demand Grinder</h3>
+                        <p>64mm burrs, programmable dosing.</p>
+                        <div class="price">$799.00</div>
+                        <div class="spacer"></div>
+                        <a class="btn" href="#">Add to Cart</a>
+                    </div>
+
+                    <div class="card">
+                        <div class="thumb"></div>
+                        <h3>Vanilla Syrup (4 × 1L)</h3>
+                        <p>Cane sugar, natural flavor.</p>
+                        <div class="price">$49.00</div>
+                        <div class="spacer"></div>
+                        <a class="btn" href="#">Add to Cart</a>
+                    </div>
+
+                    <div class="card">
+                        <div class="thumb"></div>
+                        <h3>66 mm Espresso Cups (6)</h3>
+                        <p>Porcelain, stackable.</p>
+                        <div class="price">$24.00</div>
+                        <div class="spacer"></div>
+                        <a class="btn" href="#">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>

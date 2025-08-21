@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/default.html}">
+
+<body>
+    <div id="page" layout:fragment="content">
+        <section id="home-page-slider" class="carousel" tabindex="0"
+            th:style="${showHomePageSlider ? '' : 'display: none;'}">
+            <div class="slides">
+                <div class="slide" style="background-image:url('img/banner-1.jpg')">
+                    <div class="overlay"></div>
+                    <div class="caption container">
+                        <div>
+                            <h2>Grow your business</h2>
+                            <p>Bulk pricing, fast delivery, and trusted equipment.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide" style="background-image:url('img/banner-2.jpg')">
+                    <div class="overlay"></div>
+                    <div class="caption container">
+                        <div>
+                            <h2>Create the perfect mood</h2>
+                            <p>Warm, cozy, and consistent—every cup, every time.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide" style="background-image:url('img/banner-3.jpg')">
+                    <div class="overlay"></div>
+                    <div class="caption container">
+                        <div>
+                            <h2>Satisfy your crowd</h2>
+                            <p>Snacks, syrups, and essentials for your busiest days.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="controls" aria-label="Slide controls"></div>
+            <button class="prev" aria-label="Previous slide">‹</button>
+            <button class="next" aria-label="Next slide">›</button>
+        </section>
+
+        <section class="hero">
+            <div class="container">
+                <div class="eyebrow">Wholesale, Done Right</div>
+                <h1 id="hero-banner">Everything your coffee shop needs—delivered fresh, fast, and fairly.</h1>
+                <p>From single-origin beans and barista gear to cups, lids, syrups, and premium equipment, we’re your
+                    one-stop
+                    wholesale partner.</p>
+                <div style="display:flex; gap:.6rem; margin-top:.8rem;">
+                    <a class="btn" href="/products">Shop Products</a>
+                    <a class="btn ghost" href="/about">Why Choose Us</a>
+                    <a class="btn ghost" href="javascript:void(0);" onclick="getBannerText();">Update Banner Text</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="coffee-promo-section"
+            th:style="${showCoffeePromo1 or showCoffeePromo2 ? 'display: block;' : 'display: none;'}">
+            <div class="container">
+                <h2>Current Promotions</h2>
+                <div class="promo-grid">
+                    <article class="promo" id="coffee-promo-1"
+                        th:style="${showCoffeePromo1 ? 'display: block;' : 'display: none;'}">
+                        <div>
+                            <span class="badge">Limited • August</span>
+                            <h3>Buy 5 Syrups, Get 1 Free</h3>
+                            <p class="muted">Mix and match classic and seasonal flavors. Perfect for fall menus.</p>
+                        </div>
+                        <a class="btn secondary" href="/products">Browse Syrups</a>
+                    </article>
+                    <article class="promo" id="coffee-promo-2"
+                        th:style="${showCoffeePromo2 ? 'display: block;' : 'display: none;'}">
+                        <div>
+                            <span class="badge">New Roast</span>
+                            <h3>15% Off House Espresso Beans (22 lb)</h3>
+                            <p class="muted">Balanced chocolate notes with a hint of citrus—ideal for milk drinks.</p>
+                        </div>
+                        <a class="btn secondary" href="/products">Shop Beans</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <h2>Popular Categories</h2>
+                <div class="grid">
+                    <div class="card">
+                        <div class="thumb"></div>
+                        <h3>Beans & Roasts</h3>
+                        <p>House blends, single-origin, decaf, espresso.</p>
+                    </div>
+                    <div class="card">
+                        <div class="thumb"></div>
+                        <h3>Cups & Lids</h3>
+                        <p>Compostable options in all sizes.</p>
+                    </div>
+                    <div class="card">
+                        <div class="thumb"></div>
+                        <h3>Espresso Machines</h3>
+                        <p>2–3 group heads, plumbed-in, pro-grade.</p>
+                    </div>
+                    <div class="card">
+                        <div class="thumb"></div>
+                        <h3>Grinders</h3>
+                        <p>On-demand, bulk, and filter grinders.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head th:replace="~{fragments/head :: head}"></head>
+
+<body>
+
+    <header class="header">
+        <div class="container nav">
+            <a class="brand" href="/" aria-label="Coffee Supply Co. Home">
+                <span class="logo" aria-hidden="true"></span>
+                <div>
+                    <span class="title">Coffee Supply Co.</span>
+                    <span class="subtitle">Wholesale Essentials</span>
+                </div>
+            </a>
+            <button class="nav-toggle" aria-label="Toggle navigation">Menu</button>
+            <ul role="menubar" aria-label="Primary">
+                <li role="none"><a role="menuitem" href="/"
+                        th:style="${currentPage == '/' ? 'background: rgba(163,90,43,.08);' : ''}">Home</a>
+                </li>
+                <li role="none"><a role="menuitem" href="/about"
+                        th:style="${currentPage == '/about' ? 'background: rgba(163,90,43,.08);' : ''}">About</a>
+                </li>
+                <li role="none"><a role="menuitem" href="/products"
+                        th:style="${currentPage == '/products' ? 'background: rgba(163,90,43,.08);' : ''}">Products</a>
+                </li>
+                <li role="none"><a role="menuitem" href="/contact"
+                        th:style="${currentPage == '/contact' ? 'background: rgba(163,90,43,.08);' : ''}">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <div layout:fragment="content"></div>
+    <footer class="footer">
+        <div class="container">
+            <div class="grid">
+                <div class="card" style="grid-column: span 6;">
+                    <h3>Serving Local Cafés</h3>
+                    <p class="muted">We deliver quality supplies on time so you can focus on delighting guests.</p>
+                </div>
+                <div class="card" style="grid-column: span 3;">
+                    <h3>Contact</h3>
+                    <p class="muted">hello@coffeesupply.example<br /> (555) 123-4567</p>
+                </div>
+                <div class="card" style="grid-column: span 3;">
+                    <h3>Hours</h3>
+                    <p class="muted">Mon–Fri 8:00–6:00<br />Sat 9:00–1:00</p>
+                </div>
+            </div>
+            <div class="spacer"></div>
+            <small>© 2025 Coffee Supply Co. • Built with love (and caffeine).</small>
+        </div>
+        <script src="js/script.js" defer></script>
+    </footer>
+</body>
+
+</html>

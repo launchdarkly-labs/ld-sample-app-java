@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/default.html}">
+
+<body>
+    <div id="page" layout:fragment="content">
+        <section class="hero">
+            <div class="container">
+                <div class="eyebrow">Let's Talk</div>
+                <h1>Contact Us</h1>
+                <p class="muted">Have a question about products, pricing, or deliveries? Send a note—our team typically
+                    replies
+                    the
+                    same business day.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <form action="#" method="post">
+                    <div class="form-row">
+                        <div>
+                            <label for="name">Your Name</label>
+                            <input id="name" name="name" placeholder="Jane Barista" required>
+                        </div>
+                        <div>
+                            <label for="shop">Shop Name</label>
+                            <input id="shop" name="shop" placeholder="Sunrise Café">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div>
+                            <label for="email">Email</label>
+                            <input id="email" name="email" type="email" placeholder="you@example.com" required>
+                        </div>
+                        <div>
+                            <label for="phone">Phone</label>
+                            <input id="phone" name="phone" placeholder="(555) 123-4567">
+                        </div>
+                    </div>
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" placeholder="Tell us what you're looking for…"></textarea>
+                    <div style="display:flex; gap:.6rem; align-items:center;">
+                        <button class="btn" type="submit">Send Message</button>
+                        <span class="muted">or email hello@coffeesupply.example</span>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>

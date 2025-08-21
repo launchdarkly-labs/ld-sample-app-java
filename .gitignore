@@ -32,3 +32,8 @@ build/
 ### VS Code ###
 .vscode/
 ldclient.properties
+
+.env
+src/main/resources/static/js/keys.js
+.DS_Store
+
