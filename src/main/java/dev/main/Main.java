@@ -1,6 +1,7 @@
 package dev.main;
 
 import dev.config.LD;
+import dev.config.TenantDirectory;
 import dev.event.EventMenu;
 import dev.form.Form;
 import dev.form.Dashboard;
@@ -13,7 +14,6 @@ import java.awt.Insets;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
-import javax.swing.plaf.ColorUIResource;
 
 public class Main extends javax.swing.JFrame {
     
@@ -31,19 +31,13 @@ public class Main extends javax.swing.JFrame {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(4, 4, 4, 4);
         
-        // Get pre-filled values
-        String prefilledEmail = LD.getDefaultEmail();
-        String prefilledName = LD.getDefaultName();
-        String prefilledRole = LD.getDefaultRole();
-        String prefilledTenant = LD.getDefaultTenant();
-        
-        LD.showMessage("Pre-filled email: " + (prefilledEmail != null && !prefilledEmail.isEmpty() ? "Found" : "Not found"));
-        LD.showMessage("Pre-filled name: " + (prefilledName != null && !prefilledName.isEmpty() ? "Found" : "Not found"));
-        LD.showMessage("Pre-filled role: " + (prefilledRole != null && !prefilledRole.isEmpty() ? "Found" : "Not found"));
-        LD.showMessage("Pre-filled tenant: " + (prefilledTenant != null && !prefilledTenant.isEmpty() ? "Found" : "Not found"));
-        
-        if (LD.getSdkKey() == null || LD.getSdkKey().isEmpty()) {
-            LD.showMessage("Warning: LAUNCHDARKLY_SDK_KEY is not present");
+        String email = blankToEmpty(LD.getDefaultEmail());
+        String name = blankToEmpty(LD.getDefaultName());
+        String role = blankToEmpty(LD.getDefaultRole());
+        String tenantId = blankToEmpty(LD.getDefaultTenantId());
+
+        if (LD.getSdkKey().isEmpty()) {
+            LD.showMessage("Warning: LAUNCHDARKLY_SDK_KEY is not present in .env");
             JOptionPane.showMessageDialog(null,
                 "LAUNCHDARKLY_SDK_KEY is not present in the .env file.\nAdd it there and restart.",
                 "Missing SDK key",
@@ -51,40 +45,21 @@ public class Main extends javax.swing.JFrame {
             return false;
         }
 
-        // Create text fields
-        JTextField emailField = new JTextField(20);
-        JTextField nameField = new JTextField(20);
-        JTextField roleField = new JTextField(20);
-        JTextField tenantField = new JTextField(20);
-        
-        // Pre-fill fields with values from .env if available
-        if (prefilledEmail != null && !prefilledEmail.isEmpty()) {
-            emailField.setText(prefilledEmail);
-        }
-        if (prefilledName != null && !prefilledName.isEmpty()) {
-            nameField.setText(prefilledName);
-        }
-        if (prefilledRole != null && !prefilledRole.isEmpty()) {
-            roleField.setText(prefilledRole);
-        }
-        if (prefilledTenant != null && !prefilledTenant.isEmpty()) {
-            tenantField.setText(prefilledTenant);
-        }
-        
-        // Add components to panel
-        panel.add(new JLabel("Please enter your email address:"), gbc);
+        JTextField emailField = field(email);
+        JTextField nameField = field(name);
+        JTextField roleField = field(role);
+        JTextField tenantField = field(tenantId);
+
+        panel.add(new JLabel("Email:"), gbc);
         panel.add(emailField, gbc);
         panel.add(Box.createVerticalStrut(10), gbc);
-        
-        panel.add(new JLabel("Please enter your name:"), gbc);
+        panel.add(new JLabel("Name:"), gbc);
         panel.add(nameField, gbc);
         panel.add(Box.createVerticalStrut(10), gbc);
-
-        panel.add(new JLabel("Please enter your role:"), gbc);
+        panel.add(new JLabel("Role:"), gbc);
         panel.add(roleField, gbc);
         panel.add(Box.createVerticalStrut(10), gbc);
-
-        panel.add(new JLabel("Please enter your tenant:"), gbc);
+        panel.add(new JLabel("Tenant ID (1001, 2002, or 3003):"), gbc);
         panel.add(tenantField, gbc);
         
         // Configure dialog appearance
@@ -119,24 +94,31 @@ public class Main extends javax.swing.JFrame {
             LD.showMessage("User cancelled setup");
             return false;
         }
+
+        email = emailField.getText().trim();
+        name = nameField.getText().trim();
+        role = roleField.getText().trim();
+        tenantId = tenantField.getText().trim();
         
-        // Get values
-        String email = emailField.getText().trim();
-        String name = nameField.getText().trim();
-        String role = roleField.getText().trim();
-        String tenant = tenantField.getText().trim();
-        
-        // Validate inputs
-        if (email.isEmpty() || name.isEmpty() || role.isEmpty() || tenant.isEmpty()) {
+        if (email.isEmpty() || name.isEmpty() || role.isEmpty() || tenantId.isEmpty()) {
             JOptionPane.showMessageDialog(null,
                 "All fields are required",
                 "Validation Error",
                 JOptionPane.ERROR_MESSAGE);
             return false;
         }
+
+        if (TenantDirectory.find(tenantId).isEmpty()) {
+            JOptionPane.showMessageDialog(null,
+                "Unknown tenant_id \"" + tenantId + "\".\nKnown tenants: "
+                    + String.join(", ", TenantDirectory.knownIds()),
+                "Invalid tenant",
+                JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
         
         try {
-            LD.initialize(email, name, role, tenant);
+            LD.initialize(email, name, role, tenantId);
             return true;
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, "Failed to initialize LaunchDarkly", ex);
@@ -146,6 +128,16 @@ public class Main extends javax.swing.JFrame {
                 JOptionPane.ERROR_MESSAGE);
             return false;
         }
+    }
+
+    private static String blankToEmpty(String value) {
+        return value == null ? "" : value;
+    }
+
+    private static JTextField field(String value) {
+        JTextField textField = new JTextField(20);
+        textField.setText(value);
+        return textField;
     }
     
     public Main() {
