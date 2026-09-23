@@ -1,49 +1,30 @@
 # LaunchDarkly Java SDK Demo
 
-A Java Swing application demonstrating feature flag functionality using the LaunchDarkly Java SDK.
+A Java Swing application demonstrating feature flag functionality using the LaunchDarkly Java Server SDK.
 
+Flags live in the LaunchDarkly project `nteixeira-ld-custom`.
 
 ## Prerequisites
 
-- Java 11 or higher (built with Java 23)
+- Java 25
 - Maven
-- LaunchDarkly account and SDK key
-- Terraform (for feature flag setup)
-- LaunchDarkly API access token
+- LaunchDarkly SDK key for `nteixeira-ld-custom`
 
 ## Setup
 
 1. Clone the repository
-2. Copy `.env.example` to `.env` and add your LaunchDarkly SDK key, e-mail and name:
+2. Copy `.env.example` to `.env` and add your SDK key plus user and tenant values:
    ```
    LAUNCHDARKLY_SDK_KEY=your-sdk-key
-   LAUNCHDARKLY_USER_EMAIL=your-email@example.com
-   LAUNCHDARKLY_USER_NAME="Your Name"
+   USER_EMAIL=your-email@example.com
+   USER_NAME="Your Name"
+   USER_ROLE=admin
+   TENANT=acme
    ```
 
-### Feature Flag Setup with Terraform
+Evaluations use a multi-context: a `user` context (key and `email` attribute from `USER_EMAIL`, plus `role`) and a `tenant` context whose key is `TENANT`.
 
-1. Create `terraform.tfvars`:
-   ```hcl
-   user_name = "your-user-name"
-   launchdarkly_access_token = "api-key-here"
-   ```
-
-2. Initialize and apply Terraform:
-   ```bash
-   terraform init
-   terraform plan
-   terraform apply
-   ```
-
-This creates:
-- Project "LaunchDarkly Java Demo - {user_name}"
-- Production, test, and development environments
-- Feature flags with prerequisites:
-  - Form 1 (`dashboard`)
-  - Form 1 Bar Chart (`dashboard-bar-chart`)
-  - Form 1 Line Chart (`dashboard-line-chart`)
-  - Form 1 Progress Meters (`dashboard-progress-meters`)
+The SDK key is read only from the project `.env` file. The app does not run without a valid key and a successful SDK connection.
 
 ## Building
 
@@ -53,7 +34,6 @@ mvn clean package
 ```
 
 This will create `launchdarkly-java-demo.jar` in the `dist` directory.
-
 
 ## Running
 
@@ -71,29 +51,31 @@ There are two ways to run the application:
 
 ## Feature Flags
 
-The application demonstrates three feature flags:
+The application uses these flags in `nteixeira-ld-custom`:
 
+- `dashboard` - Keystone prerequisite flag for the dashboard features
 - `dashboard-progress-meters` - Controls the visibility of progress meters
 - `dashboard-line-chart` - Controls the line chart display
-- `dashboard-chart` - Controls the main chart display
-- `dashboard` - Keystone prerequisite flag for controlling the release of all 3 features at once
+- `dashboard-bar-chart` - Controls the main chart display
+
+`dashboard-progress-meters`, `dashboard-line-chart`, and `dashboard-bar-chart` require `dashboard` to be on (true) before they can serve true.
 
 ## Development
 
 The project uses:
-- Java Swing for the UI
-- LaunchDarkly Java Server SDK for feature flags
+- Java 25 and Java Swing for the UI
+- LaunchDarkly Java Server SDK 7.16.0 for feature flags
 - Maven for build management
 - dotenv-java for environment variable management
-- Terraform for feature flag management
 
 ### Project Structure
 
 ```
-src/main/java/dev/bradbunce/ - Source code
+src/main/java/dev/ - Source code
 ├── chart/     - Chart components and utilities
 ├── component/ - UI components
 ├── config/    - LaunchDarkly configuration
+├── event/     - Menu events
 ├── form/      - Application forms
 ├── main/      - Application entry point
 └── swing/     - Custom Swing components
